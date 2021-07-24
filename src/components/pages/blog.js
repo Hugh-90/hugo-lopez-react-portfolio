@@ -31,12 +31,12 @@ class Blog extends Component {
   handleDeleteClick(blog) {
     axios
       .delete(
-        'https://api.devcamp.space/portfolio/portfolio_blogs/${blog.id}',
+        `https://api.devcamp.space/portfolio/portfolio_blogs/${blog.id}`,
         { withCredentials: true }
       )
       .then(response => {
         this.setState({
-          blogItems: this.state.blogItems.filter(blogItem =>{
+          blogItems: this.state.blogItems.filter(blogItem => {
             return blog.id !== blogItem.id;
           })
         });
@@ -90,8 +90,9 @@ class Blog extends Component {
 
     axios
       .get(
-        `https://hugolopez.devcamp.space/portfolio/portfolio_blogs?page=${this
-          .state.currentPage}`,
+        `https://hugolopez.devcamp.space/portfolio/portfolio_blogs?page=${
+          this.state.currentPage
+        }`,
         {
           withCredentials: true
         }
@@ -123,13 +124,13 @@ class Blog extends Component {
         return (
           <div key={blogItem.id} className="admin-blog-wrapper">
             <BlogItem blogItem={blogItem} />
-            <a onClick={ () => this.handleDeleteClick(BlogItem)}>
+            <a onClick={() => this.handleDeleteClick(blogItem)}>
               <FontAwesomeIcon icon="trash" />
             </a>
           </div>
-        )
+        );
       } else {
-      return <BlogItem key={blogItem.id} blogItem={blogItem} />;
+        return <BlogItem key={blogItem.id} blogItem={blogItem} />;
       }
     });
 
